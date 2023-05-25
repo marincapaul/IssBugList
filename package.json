@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@rails/activestorage": "^7.0.4-3",
+    "@rails/ujs": "^7.0.4-3",
+    "@rails/webpacker": "5.4.4",
+    "autoprefixer": "^10.4.14",
+    "esbuild": "^0.17.14",
+    "flowbite": "^1.6.5",
+    "postcss": "^8.4.21",
+    "sass": "^1.60.0",
+    "tailwindcss": "^3.3.0",
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3"
+  },
+  "engines": {
+    "node": "14.x",
+    "yarn": "1.x"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
+  }
+}

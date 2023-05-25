@@ -1,0 +1,18 @@
+%div.bg-gray-900
+  %h1.font-bold.text-4xl.text-center.text-white BugHunt
+  %p.text-white.text-center.mb-5 Let's hunt them down!
+
+  
+  - if tester_signed_in?
+    = link_to "log out", destroy_tester_session_url, method: :delete
+  - elsif developer_signed_in?
+    = link_to "log out", destroy_developer_session_url, method: :delete
+  - else 
+    .grid.justify-center
+      .grid.grid-flow.flex.gap-6.mb-4.sm:grid-cols-2.justify-center
+        .btn.box-border.h-32.flex.w-32.items-center.text-center.border-4.bg-gradient-to-r.from-indigo-600.to-pink-500.hover:from-indigo-700.hover:to-pink-600.text-white.hover
+          = link_to "Login as Tester", new_tester_session_url, class:"py-10 font-bold px-1"
+        .btn.box-border.h-32.flex.w-32.items-center.text-center.border-4.bg-gradient-to-r.from-indigo-600.to-pink-500.hover:from-indigo-700.hover:to-pink-600.text-white.hover
+          = link_to "Login as Developer", new_developer_session_url, class:"py-10 font-bold px-1"
+
+    
