@@ -1,14 +1,19 @@
-%div.bg-gray-900
+%div.bg-gray-900.flex.flex-col.items-center
   %h1.font-bold.text-4xl.text-center.text-white BugHunt
   %p.text-white.text-center.mb-5 Let's hunt them down!
 
   
   - if tester_signed_in?
-    = link_to "log out", destroy_tester_session_url, method: :delete
+    .grid.gap-8.px-4.py-6.lg:py-10.md:grid-cols-2
+      = render @bugs
+    
+    .btn.box-border.text-white.text-center.justify-center.box.bg-gray-800.hover:bg-gray-700.w-48.rounded.flex
+      = link_to "Add New Bug", add_bug_path, class: "py-2 px-11"
   - elsif developer_signed_in?
-    = link_to "log out", destroy_developer_session_url, method: :delete
+    .grid.gap-8.px-4.py-6.lg:py-10.md:grid-cols-2
+      = render @bugs
   - else 
-    .grid.justify-center
+    .grid.justify-center  
       .grid.grid-flow.flex.gap-6.mb-4.sm:grid-cols-2.justify-center
         .btn.box-border.h-32.flex.w-32.items-center.text-center.border-4.bg-gradient-to-r.from-indigo-600.to-pink-500.hover:from-indigo-700.hover:to-pink-600.text-white.hover
           = link_to "Login as Tester", new_tester_session_url, class:"py-10 font-bold px-1"

@@ -1,0 +1,40 @@
+-# %div.box-border.h-64.w-64.text-white.border-4.rounded
+-#   %p.text-center.text-lg.justify-self-center
+-#     = bug.title
+-#   %p  
+-#     = bug.description
+.items-center.rounded-lg.shadow.sm:flex.bg-gray-800.border-gray-700
+  .p-5
+    %h3.text-xl.font-bold.tracking-tight.text-white
+      - if tester_signed_in?
+        %a{:href => edit_bug_path(bug.id)}= bug.title
+      - else 
+        =bug.title
+    - unless bug.developer_id.nil?
+      %span.text-gray-400=bug.status.capitalize + " by " + Developer.find(bug.developer_id).name
+    - else
+      %span.text-gray-400=bug.status.capitalize
+    %p.mt-3.mb-4.font-light.text-gray-400=bug.description
+
+    - if developer_signed_in?
+      = form_for(bug, url: update_status_path, html: { method: :put }) do |f|
+        - stat = "Solved"
+        - if bug.status == "unsolved"
+          = f.hidden_field :status, as: :hidden, value: :taken
+          - stat = "Take"
+        - elsif bug.status == "taken"
+          = f.hidden_field :status, as: :hidden, value: :solved
+          - stat = "Mark as solved"
+        = f.hidden_field :id, as: :hidden, value: bug.id
+        - if bug.developer_id.nil? || bug.developer_id == current_developer.id
+          .actions
+            %button.btn.box-border.text-white.text-center.justify-center.box.bg-gray-600.hover:bg-gray-700.w-48.rounded.flex
+              = f.submit stat, class: 'py-2.5', role: "button"  
+        - else
+          .actions
+          %button.btn.box-border.text-white.text-center.justify-center.box.bg-gray-700.w-48.rounded.flex{disabled: "disabled"}
+            = f.submit stat, class: 'py-2.5', role: "button", disabled: "disabled"
+    - elsif tester_signed_in? && bug.status == "closed"
+      .text-red-800 
+        = link_to "delete", bug, method: :delete, data: { confirm: "You sure?" }
+  

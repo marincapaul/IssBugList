@@ -76,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_084359) do
     t.bigint "developer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_bugs_on_created_at"
     t.index ["developer_id"], name: "index_bugs_on_developer_id"
     t.index ["tester_id"], name: "index_bugs_on_tester_id"
   end

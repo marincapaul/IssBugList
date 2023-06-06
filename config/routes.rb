@@ -9,14 +9,16 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: 'pages#home'
   get :test, to: 'pages#test'
-  # resources :owners do
-  #   collection do
-  #     get '/:id/edit_profile' => 'owners#edit_profile', as: :edit_profile
-  #     put '/:id/update_profile' => 'owners#update_profile', as: :update_profile
-  #   end
-    
-  # end
+  get :add_bug, to: 'pages#bug_form'
+  post :add_bug, to: 'bugs#create'
+  put "/update_status" => 'bugs#update_status'
+  resources :bugs do
+    collection do
+      put ":id/update" => 'bugs#update', as: :update
+    end
+  end
 
+   
   
 
   # Defines the root path route ("/")

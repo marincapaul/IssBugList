@@ -32,6 +32,9 @@ gem 'devise'
 gem 'activeadmin'
 gem 'active_storage_validations'
 
+# This must be the first gem listed
+gem 'appmap', group: %i[test development]
+
 # TailwindCSS 3.0
 gem 'tailwindcss-rails'
 

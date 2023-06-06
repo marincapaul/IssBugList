@@ -9,5 +9,6 @@ class CreateBugs < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :bugs, :created_at
   end
 end
